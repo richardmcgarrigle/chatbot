@@ -18,7 +18,6 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
 
-
 var bot = new builder.UniversalBot(connector);
 bot.localePath(path.join(__dirname, './locale'));
 
@@ -35,16 +34,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
-
-
-.matches('greeting', (session, args) => {
-    console.log('session', session)
-    console.log('args', args)
-    session.send('hello.');
-})
-
 .onDefault((session) => {
-    console.log('session', session)
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });
 
