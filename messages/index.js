@@ -40,7 +40,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('greeting', (session, args) => {
     console.log('session', session)
     console.log('args', args)
-    session.send('hello.', JSON.stringify(args), JSON.stringify(session));
+    session.send('hello.');
 })
 
 .onDefault((session) => {
