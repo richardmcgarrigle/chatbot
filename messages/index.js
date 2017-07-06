@@ -38,11 +38,14 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
 
 .matches('greeting', (session, args) => {
+    console.log('session', session)
+    console.log('args', args)
     session.send('hello.', JSON.stringify(args), JSON.stringify(session));
 })
 
 .onDefault((session) => {
-    session.send('Sorry, I did not understand \'%s\'.', JSON.stringify(session));
+    console.log('session', session)
+    session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });
 
 bot.dialog('/', intents);    
