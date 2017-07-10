@@ -35,6 +35,9 @@ var intents = new builder.IntentDialog({recognizers: [recognizer]})
 /*
  .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
  */
+    .matches('greeting', function (session, args) {
+        session.send('None intends matched for \'%s\'.', session.message.text);
+    })
     .matches('None', function (session, args) {
         session.send('None intends matched for \'%s\'.', session.message.text);
     })
