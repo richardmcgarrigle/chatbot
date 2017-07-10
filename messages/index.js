@@ -1,9 +1,9 @@
 /*-----------------------------------------------------------------------------
-This template demonstrates how to use an IntentDialog with a LuisRecognizer to add 
-natural language support to a bot. 
-For a complete walkthrough of creating this type of bot see the article at
-https://aka.ms/abs-node-luis
------------------------------------------------------------------------------*/
+ This template demonstrates how to use an IntentDialog with a LuisRecognizer to add
+ natural language support to a bot.
+ For a complete walkthrough of creating this type of bot see the article at
+ https://aka.ms/abs-node-luis
+ -----------------------------------------------------------------------------*/
 "use strict";
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
@@ -30,27 +30,28 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
-var intents = new builder.IntentDialog({ recognizers: [recognizer] })
-.matches('greeting',function(session, args){
-    session.send('Hi.');
-})
-/*
-.matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
-*/
-.onDefault((session) => {
-    session.send('Sorry, I did not understand \'%s\'.', session.message.text);
-});
+var intents = new builder.IntentDialog({recognizers: [recognizer]})
 
-bot.dialog('/', intents);    
+/*
+ .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
+ */
+    .matches('None', function (session, args) {
+        session.send('None intends matched for \'%s\'.', session.message.text);
+    })
+    .onDefault((session) => {
+        session.send('Sorry, I did not understand \'%s\'.', session.message.text);
+    });
+
+bot.dialog('/', intents);
 
 if (useEmulator) {
     var restify = require('restify');
     var server = restify.createServer();
-    server.listen(3978, function() {
+    server.listen(3978, function () {
         console.log('test bot endpont at http://localhost:3978/api/messages');
     });
-    server.post('/api/messages', connector.listen());    
+    server.post('/api/messages', connector.listen());
 } else {
-    module.exports = { default: connector.listen() }
+    module.exports = {default: connector.listen()}
 }
 
