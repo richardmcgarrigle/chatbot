@@ -39,6 +39,7 @@ var intents = new builder.IntentDialog({recognizers: [recognizer]})
         session.send('None intends matched for \'%s\'.', session.message.text);
     })
     .matches('None', function (session, args) {
+        console.log('args', args)
         session.send('None intends matched for \'%s\'.', session.message.text);
     })
     .onDefault((session) => {
